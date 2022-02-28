@@ -31,7 +31,7 @@ const searchResult = (searchresults) => {
     searchresults.forEach(searchresult => {
         // console.log(searchresult.slug)
         const div = document.createElement('div');
-        div.classList.add('col-lg-4')
+        div.classList.add('col-lg-3')
         div.innerHTML = `
         <div class="card py-1">
             <img src="${searchresult.image}" class="card-img-top" alt="...">
@@ -40,7 +40,7 @@ const searchResult = (searchresults) => {
                  <p class="card-text text-justify fs-5">${searchresult.brand}</p>
             </div>
             <div class="card-footer w-100 text-center">
-                <button class="btn btn-primary text-uppercase" onclick="phoneDetails('${searchresult.slug}')"> View More <i class="fas fa-eye fa-1x"></i> </button>
+                <button class="btn btn-primary text-uppercase" onclick="phoneDetails('${searchresult.slug}')"> Buy Now <i class="fas fa-buy fa-1x"></i> </button>
             </div>
         </div>
     `
@@ -61,38 +61,106 @@ const phoneShow = (details) => {
   // for (const sensorvalue of sensor) {
   //     console.log(sensorvalue);
   // }
-  // Destructure
-  // const {WLAN, Bluetooth, GPS, NFC, Radio, USB} = details.others;
 
-  row.textContent = "";
-  errorId.textContent = "";
-  const div = document.createElement("div");
-  div.classList.add("col-lg-12");
-  div.innerHTML = `
-            <div class="card mb-5">
-                <div class="row g-0">
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <img src="${details.image}" class="img-fluid rounded-start h-100 w-100 py-3 ps-1" alt="...">
-                    </div>
-                    <div class="col-lg-8 col-md-6 col-12">
-                        <div class="card-body">
-                            <h2 class="card-title fw-bold pink">${details?.name}</h2>
-                            <p class="card-text text-justify fs-5">${details?.releaseDate}</p>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active"><a href="index.html" class="text-decoration-none pink">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">${details?.brand}</li>
-                                </ol>
-                            </nav>
-                            <p class="card-text text-justify fs-5">${details?.brand}</p>
-                        </div>
-                    </div>
-                    <div class="cart text-center d-flex justify-content-between px-3">
-                        <a class="card-text text-center" href="#" target="_blank"> <i class="fab fa-youtube-square fa-3x pink"></i> </a>
-                        <button class="btn bg-pink text-white fs-4 fw-bold" onclick="#">Add to Cart</button>
+    row.textContent = "";
+    errorId.textContent = "";
+    const div = document.createElement("div");
+    div.classList.add("col-lg-12");
+    div.innerHTML = `
+        <div class="card mb-5">
+            <div class="row g-0">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <img src="${
+                      details.image
+                    }" class="img-fluid rounded-start h-100 w-100 py-3 ps-1" alt="...">
+                </div>
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="card-body">
+                        <h2 class="card-title fw-bold pink">${
+                          details?.name
+                        }</h2>
+                        <p class="card-text text-justify fs-6">${
+                          details?.releaseDate
+                        }</p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active"><a href="index.html" class="text-decoration-none pink">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">${
+                                  details?.brand
+                                }</li>
+                            </ol>
+                        </nav>
+                       
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th class="fs-6 fw-bold">Brand: </th>
+                                    <td>${details?.brand ?? `NO`}</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">ChipSet: </th>
+                                    <td>${
+                                      details?.mainFeatures?.chipSet ?? `NO`
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">Storage: </th>
+                                    <td>${
+                                      details?.mainFeatures?.storage ?? `NO`
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">DisplaySize: </th>
+                                    <td>${
+                                      details?.mainFeatures?.displaySize ?? `NO`
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">Memory: </th>
+                                    <td>${
+                                      details?.mainFeatures?.memory ?? `NO`
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">WLAN: </th>
+                                    <td>${details?.others?.WLAN ?? `NO`}</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">Bluetooth: </th>
+                                    <td>${
+                                      details?.others?.Bluetooth ?? `NO`
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">GPS: </th>
+                                    <td>${details?.others?.GPS ?? `NO`}</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">Radio: </th>
+                                    <td>${details?.others?.Radio ?? `NO`}</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-6 fw-bold">USB: </th>
+                                    <td>${details?.others?.USB ?? `NO`}</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <div class="cart text-center d-flex justify-content-between px-3">
+                    <div class="d-flex justify-content-center">
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-facebook-square fa-2x fb"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-instagram fa-2x insta"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-twitter-square fa-2x twit"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-whatsapp fa-2x wapp"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fas fa-print fa-2x ytube"></i> </a>
+                    </div>
+                    <button class="btn btn-primary fs-5 fw-bold" onclick="#">Add to Cart</button>
+                </div>
             </div>
-        `;
-  row.appendChild(div);
+        </div>
+    `;
+    row.appendChild(div);
 };
