@@ -30,13 +30,14 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-bars border-0 fa-2x text-white"></i>
                     </button>
-                    <div class="collapse navbar-collapse d-flex align-content-center justify-content-center" id="navbarNav">
-                        <div class="w-50">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="w-75 d-lg-block d-none">
                             <div class="d-flex border border-1 rounded-pill">
-                                <input id="search" class="form-control me-2 rounded-pill" type="text" placeholder="Search Product" aria-label="Search">
+                                <input id="search" class="form-control me-2 rounded-pill" type="text" placeholder="Search Mobile" aria-label="Search">
                                 <button class="btn btn-close-white position-relative me-3" type="submit" onclick="searchBar()"><i class="fas fa-search fa-2x"></i></button>
                             </div>
                         </div>
+                        <!-- desktop Search -->
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item px-2">
                                 <a class="nav-link text-white fw-bold" href="#"> <i class="fas fa-heart fa-2x"></i>
@@ -46,6 +47,13 @@
                                 <a class="nav-link text-white fw-bold" href="#"> <i class="fas fa-cart-arrow-down fa-2x"></i> <span class="position-relative top-0 ms-2 translate-middle badge rounded-pill bg-light text-primary fs-6" id="cart">0</span></a>
                             </li>
                         </ul>
+                        <div class="w-75 d-lg-none">
+                            <div class="d-flex border border-1 rounded-pill">
+                                <input id="search" class="form-control me-2 rounded-pill" type="text" placeholder="Search Product" aria-label="Search">
+                                <button class="btn btn-close-white position-relative me-3" type="submit" onclick="searchBar()"><i class="fas fa-search fa-2x"></i></button>
+                            </div>
+                        </div>
+                        <!-- Mobile Search -->
                     </div>
                 </div>
             </nav>
