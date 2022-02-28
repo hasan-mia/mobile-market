@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mobile Market</title>
+        <link rel="icon" href="img/icon.png" sizes="50x50">
+        <!-- boostrap 5.3.1 -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- fontawesome 5.10 -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <!-- main Style -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <!--========================
+        |       Header Part         |
+        =========================-->
+        <header class="pb-1">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary">
+                <div class="container">
+                    <a class="navbar-brand w-25" href="index.html">
+                        <img class="w-50 h-75" src="img/logo.png" alt="logo">
+                        <!-- <span class="fw-bold logo text-white text-uppercase">Mobile Market</span> -->
+                        <!-- <p id="date" class="text-center text-white fs-6"></p> -->
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars border-0 fa-2x text-white"></i>
+                    </button>
+                    <div class="collapse navbar-collapse d-flex align-content-center justify-content-center" id="navbarNav">
+                        <div class="w-50">
+                            <div class="d-flex border border-1 rounded-pill">
+                                <input id="search" class="form-control me-2 rounded-pill" type="text" placeholder="Search Product" aria-label="Search">
+                                <button class="btn btn-close-white position-relative me-3" type="submit" onclick="searchBar()"><i class="fas fa-search fa-2x"></i></button>
+                            </div>
+                        </div>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item px-2">
+                                <a class="nav-link text-white fw-bold" href="#"> <i class="fas fa-heart fa-2x"></i>
+                                    <!--<span class="position-relative top-0 ms-2 translate-middle badge rounded-pill bg-light text-primary fs-6" id="whishlist">0</span>--></a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a class="nav-link text-white fw-bold" href="#"> <i class="fas fa-cart-arrow-down fa-2x"></i> <span class="position-relative top-0 ms-2 translate-middle badge rounded-pill bg-light text-primary fs-6" id="cart">0</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- end header -->
+
+
+        <!--========================
+        |       Main Part         |
+        =========================-->
+        <main class="pt-5">
+            <section class="categories p-5">
+                <div class="container">
+                    <div class="row" id="row">
+
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+                <p class="d-none" id="error">Sorry! we don't found anything</p>
+            </section>
+            <!-- end section -->
+        </main>
+        <!-- end main -->
+
+        <!--========================
+        |       Footer Part        |
+        =========================-->
+        <footer class="text-center text-white mb-0 pb-0">
+            <p class="bg-primary ">&copy; 2022 all right reserved by mobilemarket.com</p>
+        </footer>
+        <!-- end footer -->
+
+        <!--========================
+        |      All Javascript       |
+        =========================-->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+
+</html>
