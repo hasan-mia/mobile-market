@@ -4,21 +4,28 @@
  * Email: hasanrafi69@gmail.com
  * Mobile: +880-161-782323
  */
-// row Variable
+// ===== Variable =======
 const row = document.getElementById('row');
 // const gallery = document.getElementById('gallery');
 const searchId = document.getElementById('search');
 const errorId = document.getElementById('error');
+// =======Error======== 
+const showError = () => {
+    errorId.className = 'd-block text-center text-danger fw-bold fs-4';
+    return errorId.className;
+};
 // =================Search Phone===============
 const searchBar = () => {
-    const searchValue = searchId.value;
-    if (searchValue == '') {
-        errorId.className = 'd-block text-center text-danger fw-bold fs-4'
-
+    const searchText = searchId.value;
+    if (searchText === '') {
+      errorId.className = "d-block text-center text-danger fw-bold fs-4";
     } else {
-        fetch(`https://openapi.programming-hero.com/api/phones?search=${searchValue}`)
-            .then(res => res.json())
-            .then(data => searchResult(data.data))
+      fetch(
+        `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+      )
+        .then((res) => res.json())
+        .then((data) => searchResult(data.data))
+        .catch(error => showError(error));
     }
 
 };
@@ -45,7 +52,8 @@ const searchResult = (searchresults) => {
             </div>
         </div>
     `;
-        row.appendChild(div);
+    row.appendChild(div);
+    errorId.textContent = "";
     })
 };
 // ==============Phone Details================
@@ -151,12 +159,12 @@ const phoneShow = (details) => {
                 </div>
                 <div class="cart text-center d-flex justify-content-between px-3">
                     <div class="d-flex justify-content-center">
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-facebook-square fa-2x fb"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-instagram fa-2x insta"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-twitter-square fa-2x twit"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-whatsapp fa-2x wapp"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fas fa-print fa-2x ytube"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-facebook-square fa-2x fb"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-instagram fa-2x insta"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-twitter-square fa-2x twit"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-whatsapp fa-2x wapp"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fas fa-print fa-2x ytube"></i> </a>
                     </div>
                     <button class="btn btn-primary fs-5 fw-bold" onclick="addCart()">Add to Cart</button>
                 </div>
