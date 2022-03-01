@@ -40,11 +40,11 @@ const searchResult = (searchresults) => {
         const div = document.createElement('div');
         div.classList.add('col-lg-3')
         div.innerHTML = `
-        <div class="card py-1">
-            <img src="${searchresult.image}" class="card-img-top" alt="...">
+        <div class="card py-1 mb-2">
+            <img src="${searchresult.image}" class="card-img-top p-3" alt="...">
             <div class="card-body">
-                <h4 class="card-title fw-bold pink">${searchresult.phone_name}</h4>
-                 <p class="card-text text-justify fs-5">${searchresult.brand}</p>
+                <h2 class="card-title fw-bold fs-5">${searchresult.phone_name}</h2>
+                 <p class="card-text text-justify fs-6">${searchresult.brand}</p>
             </div>
             <div class="card-footer w-100 d-flex justify-content-between">
                 <button class="btn btn-primary text-uppercase text-center" onclick="phoneDetails('${searchresult.slug}')"> Buy Now <i class="fas fa-buy fa-1x"></i> </button>
@@ -63,19 +63,11 @@ const phoneDetails = (id) => {
         .then(data => phoneShow(data.data))
 }
 const phoneShow = (details) => {
-  //   console.log(details?.others?.WLAN ?? `NO`);
-  // console.log(details ?.mainFeatures ?.chipSet ?? `NO`);
-  // const sensors = details ?.mainFeatures ?.sensors;
-  // const sensor = sensors.map(sensor => sensor);
-  // for (const sensorvalue of sensor) {
-  //     console.log(sensorvalue);
-  // }
-
-    row.textContent = "";
-    errorId.textContent = "";
-    const div = document.createElement("div");
-    div.classList.add("col-lg-12");
-    div.innerHTML = `
+  row.textContent = "";
+  errorId.textContent = "";
+  const div = document.createElement("div");
+  div.classList.add("col-lg-12");
+  div.innerHTML = `
         <div class="card mb-5">
             <div class="row g-0">
                 <div class="col-lg-4 col-md-6 col-12">
@@ -152,7 +144,10 @@ const phoneShow = (details) => {
                                     <th class="fs-6 fw-bold">USB: </th>
                                     <td>${details?.others?.USB ?? `NO`}</td>
                                 </tr>
-                               
+                                <tr id="sensor">
+                                   <th class="fs-6 fw-bold">Sensors: </th>
+                                   
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -171,7 +166,24 @@ const phoneShow = (details) => {
             </div>
         </div>
     `;
-    row.appendChild(div);
+  row.appendChild(div);
+// Phone Sensor 
+  const sensors = details?.mainFeatures?.sensors;
+  if (sensors != '') {
+      sensors.forEach((sensor) => {
+        const sensorId = document.getElementById("sensor");
+        const li = document.createElement("li");
+        li.innerHTML += sensor + ", ";
+        sensorId.appendChild(li);
+        console.log(sensor);
+      });
+  }
+  else{
+      const sensorId = document.getElementById("sensor");
+      const li = document.createElement("li");
+      li.innerText = "No";
+      sensorId.appendChild(li);
+  }
 };
 
 // =============Add Cart=============
