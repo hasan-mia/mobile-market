@@ -6,54 +6,56 @@
  */
 // ===== Variable =======
 const row = document.getElementById('row');
-// const gallery = document.getElementById('gallery');
+const category = document.getElementById("category");
 const searchId = document.getElementById('search');
 const errorId = document.getElementById('error');
-// =======Error======== 
-const showError = () => {
-    errorId.className = 'd-block text-center text-danger fw-bold fs-4';
-    return errorId.className;
-};
+
 // =================Search Phone===============
 const searchBar = () => {
-    const searchText = searchId.value;
-    if (searchText === '') {
-      errorId.className = "d-block text-center text-danger fw-bold fs-4";
-    } else {
-      fetch(
-        `https://openapi.programming-hero.com/api/phones?search=${searchText}`
-      )
-        .then((res) => res.json())
-        .then((data) => searchResult(data.data))
-        .catch(error => showError(error));
-    }
-
+  const searchText = (searchId.value).toLowerCase();
+  searchId.value = "";
+  if (searchText === "") {
+    errorId.className = "d-block text-center text-danger fw-bold fs-4";
+  } else {
+    fetch(
+      `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+    )
+      .then((res) => res.json())
+      .then((data) => searchResult(data.data))
+      .catch((error) => showError(error));
+  }
 };
+
+// =================Error=================
+const showError = (error) => {
+  errorId.className = "d-block text-center text-danger fw-bold fs-4";
+};
+
 
 const searchResult = (searchresults) => {
     // console.log(searchresults)
     row.textContent = '';
-    // gallery.textContent = '';
     searchId.value = '';
     searchresults.forEach(searchresult => {
         // console.log(searchresult.slug)
         const div = document.createElement('div');
-        div.classList.add('col-lg-3')
+        div.classList.add('col-lg-4')
         div.innerHTML = `
-        <div class="card py-1 mb-2">
-            <img src="${searchresult.image}" class="card-img-top p-3" alt="...">
+        <div class="card h-75 px-2 py-0 mb-0">
+            <img src="${searchresult.image}" class="card-img-top h-75 p-3" alt="...">
             <div class="card-body">
                 <h2 class="card-title fw-bold fs-5">${searchresult.phone_name}</h2>
                  <p class="card-text text-justify fs-6">${searchresult.brand}</p>
             </div>
             <div class="card-footer w-100 d-flex justify-content-between">
-                <button class="btn btn-primary text-uppercase text-center" onclick="phoneDetails('${searchresult.slug}')"> Buy Now <i class="fas fa-buy fa-1x"></i> </button>
-                <button class="btn btn-primary text-uppercase"> <i class="fas fa-heart fa-1x" id="wishlist"></i> </button>
+                <button class="btn btn-primary text-uppercase text-center" onclick="phoneDetails('${searchresult.slug}')"> View Details </button>
+                <button class="btn btn-primary text-uppercase" onclick="addCart()"> <i class="fas fa-cart-arrow-down fa-x"></i> </button>
             </div>
         </div>
     `;
     row.appendChild(div);
     errorId.textContent = "";
+    category.textContent = "";
     })
 };
 // ==============Phone Details================
@@ -73,7 +75,7 @@ const phoneShow = (details) => {
                 <div class="col-lg-4 col-md-6 col-12">
                     <img src="${
                       details.image
-                    }" class="img-fluid rounded-start h-100 w-100 py-3 ps-1" alt="...">
+                    }" class="img-fluid rounded-start h-100 w-100 py-3 ps-1" alt="Image">
                 </div>
                 <div class="col-lg-8 col-md-6 col-12">
                     <div class="card-body">
@@ -81,13 +83,13 @@ const phoneShow = (details) => {
                           details?.name
                         }</h2>
                         <p class="card-text text-justify fs-6">${
-                          details?.releaseDate
+                          details?.releaseDate ?? "Not found release date"
                         }</p>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active"><a href="index.html" class="text-decoration-none pink">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">${
-                                  details?.brand
+                                  details?.brand ?? "Not found Brand"
                                 }</li>
                             </ol>
                         </nav>
@@ -152,16 +154,16 @@ const phoneShow = (details) => {
                         </table>
                     </div>
                 </div>
-                <div class="cart text-center d-flex justify-content-between px-3">
+                <div class="cart text-center d-md-flex justify-content-between px-3">
                     <div class="d-flex justify-content-center">
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-facebook-square fa-2x fb"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-instagram fa-2x insta"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-twitter-square fa-2x twit"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-whatsapp fa-2x wapp"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
-                        <a class="card-text text-center text-decoration-none px-2" href="#"> <i class="fas fa-print fa-2x ytube"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fab fa-facebook-square fa-2x fb"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fab fa-instagram fa-2x insta"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fab fa-twitter-square fa-2x twit"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fab fa-whatsapp fa-2x wapp"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
+                        <a class="card-text text-center text-decoration-none px-lg-2" href="#"> <i class="fas fa-print fa-2x ytube"></i> </a>
                     </div>
-                    <button class="btn btn-primary fs-5 fw-bold" onclick="addCart()">Add to Cart</button>
+                    <button class="btn btn-primary fs-5 fw-bold w-sm-100 mt-lg-0 mt-3 text-uppercase">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -169,13 +171,12 @@ const phoneShow = (details) => {
   row.appendChild(div);
 // Phone Sensor 
   const sensors = details?.mainFeatures?.sensors;
-  if (sensors != '') {
+  if (sensors !== '') {
       sensors.forEach((sensor) => {
         const sensorId = document.getElementById("sensor");
         const li = document.createElement("li");
         li.innerHTML += sensor + ", ";
         sensorId.appendChild(li);
-        console.log(sensor);
       });
   }
   else{
@@ -184,6 +185,7 @@ const phoneShow = (details) => {
       li.innerText = "No";
       sensorId.appendChild(li);
   }
+   category.textContent = "";
 };
 
 // =============Add Cart=============

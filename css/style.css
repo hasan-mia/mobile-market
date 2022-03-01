@@ -48,6 +48,12 @@ body {
 .fa-print {
     background: #626262;
 }
+.title h1 {
+    border-bottom: 2px solid #0d6efd;
+    width: 100%;
+    color: #0d6efd;
+    font-weight: 600;
+}
 /* ======== NavBar========= */
 
 .btn-check:focus+.btn,
@@ -61,9 +67,13 @@ body {
     float: left;
     overflow: hidden;
 }
+
+.card {
+    box-shadow: 1px 2px 5px #0d6efd9c;
+}
 /* ========Gallery========= */
 
-.gallery-title {
+/* .gallery-title {
     font-size: 36px;
     color: #FFA500;
     text-align: center;
@@ -114,7 +124,7 @@ body {
 .gallery img {
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
     border-radius: 5px
-}
+} */
 
 
 /* =========Scroll=========*/
@@ -146,6 +156,12 @@ body {
 /* ========Media Query========= */
 
 @media (max-width: 767px) {
+    .w-18 {
+    width: 50%!important;
+    }
+    .w-75 {
+    width: 100%!important;
+}
     .navbar-toggler:focus {
         box-shadow: 0 0 0 1px #fff;
     }
