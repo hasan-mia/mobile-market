@@ -32,6 +32,7 @@ const searchBar = () => {
 };
 
 
+
 const searchResult = (searchresults) => {
   loaderId.className = "d-none";
     row.textContent = '';
@@ -61,8 +62,9 @@ const searchResult = (searchresults) => {
 const phoneDetails = (id) => {
   loaderId.className = "d-block";
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
-        .then(res => res.json())
-        .then(data => phoneShow(data.data))
+      .then((res) => res.json())
+      .then((data) => phoneShow(data.data))
+      .catch((error) => showError(error));
 }
 const phoneShow = (details) => {
   loaderId.className = "d-none";
