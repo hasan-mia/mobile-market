@@ -21,7 +21,7 @@ const searchBar = () => {
       `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     )
       .then((res) => res.json())
-      .then((data) => searchResult(data.data))
+      .then((data) => searchResult(data.data.slice(0,20)))
       .catch((error) => showError(error));
   }
 };
@@ -56,7 +56,7 @@ const searchResult = (searchresults) => {
     row.appendChild(div);
     errorId.textContent = "";
     category.textContent = "";
-    })
+    }).slice(0, 20)
 };
 // ==============Phone Details================
 const phoneDetails = (id) => {
