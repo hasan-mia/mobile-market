@@ -8,31 +8,30 @@
 const row = document.getElementById('row');
 const category = document.getElementById("category");
 const searchId = document.getElementById('search');
+const loaderId = document.getElementById("loader");
 const errorId = document.getElementById('error');
-
-// =================Search Phone===============
-const searchBar = () => {
-  const searchText = (searchId.value).toLowerCase();
-  searchId.value = "";
-  if (searchText === "") {
-    errorId.className = "d-block text-center text-danger fw-bold fs-4";
-  } else {
-    fetch(
-      `https://openapi.programming-hero.com/api/phones?search=${searchText}`
-    )
-      .then((res) => res.json())
-      .then((data) => searchResult(data.data.slice(0,20)))
-      .catch((error) => showError(error));
-  }
-};
-
 // =================Error=================
 const showError = (error) => {
   errorId.className = "d-block text-center text-danger fw-bold fs-4";
 };
 
+// =================Search Phone===============
+const searchBar = () => {
+  const searchText = (searchId.value).toLowerCase();
+  searchId.value = "";
+  loaderId.className = "d-block";
+  if (searchText === "") {
+    errorId.className = "d-block text-center text-danger fw-bold fs-4";
+  }
+  fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
+    .then((res) => res.json())
+    .then((data) => searchResult(data.data.slice(0, 20)))
+    .catch((error) => showError(error));
+};
+
 
 const searchResult = (searchresults) => {
+  loaderId.className = "d-none";
     // console.log(searchresults)
     row.textContent = '';
     searchId.value = '';
