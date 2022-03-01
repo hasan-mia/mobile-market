@@ -39,11 +39,12 @@ const searchResult = (searchresults) => {
                 <h4 class="card-title fw-bold pink">${searchresult.phone_name}</h4>
                  <p class="card-text text-justify fs-5">${searchresult.brand}</p>
             </div>
-            <div class="card-footer w-100 text-center">
-                <button class="btn btn-primary text-uppercase" onclick="phoneDetails('${searchresult.slug}')"> Buy Now <i class="fas fa-buy fa-1x"></i> </button>
+            <div class="card-footer w-100 d-flex justify-content-between">
+                <button class="btn btn-primary text-uppercase text-center" onclick="phoneDetails('${searchresult.slug}')"> Buy Now <i class="fas fa-buy fa-1x"></i> </button>
+                <button class="btn btn-primary text-uppercase"> <i class="fas fa-heart fa-1x" id="wishlist"></i> </button>
             </div>
         </div>
-    `
+    `;
         row.appendChild(div);
     })
 };
@@ -157,10 +158,18 @@ const phoneShow = (details) => {
                         <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fab fa-youtube-square fa-2x ytube"></i> </a>
                         <a class="card-text text-center text-decoration-none px-2" href="#" target="_blank"> <i class="fas fa-print fa-2x ytube"></i> </a>
                     </div>
-                    <button class="btn btn-primary fs-5 fw-bold" onclick="#">Add to Cart</button>
+                    <button class="btn btn-primary fs-5 fw-bold" onclick="addCart()">Add to Cart</button>
                 </div>
             </div>
         </div>
     `;
     row.appendChild(div);
 };
+
+// =============Add Cart=============
+const cartId = document.getElementById('cart');
+let cart = parseInt(cartId.innerText);
+const addCart = () => {
+    cart++;
+    cartId.innerText = cart;
+}
