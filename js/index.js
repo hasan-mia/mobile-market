@@ -22,8 +22,10 @@ const searchBar = () => {
   loaderId.className = "d-block";
   if (searchText === "") {
     errorId.className = "d-block text-center text-danger fw-bold fs-4";
+    loaderId.className = "d-none";
   }
-  fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
+  const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+  fetch(url)
     .then((res) => res.json())
     .then((data) => searchResult(data.data.slice(0, 20)))
     .catch((error) => showError(error));
@@ -32,11 +34,9 @@ const searchBar = () => {
 
 const searchResult = (searchresults) => {
   loaderId.className = "d-none";
-    // console.log(searchresults)
     row.textContent = '';
     searchId.value = '';
     searchresults.forEach(searchresult => {
-        // console.log(searchresult.slug)
         const div = document.createElement('div');
         div.classList.add('col-lg-4')
         div.innerHTML = `
@@ -55,17 +55,19 @@ const searchResult = (searchresults) => {
     row.appendChild(div);
     errorId.textContent = "";
     category.textContent = "";
-    }).slice(0, 20)
+    })
 };
 // ==============Phone Details================
 const phoneDetails = (id) => {
+  loaderId.className = "d-block";
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
         .then(data => phoneShow(data.data))
 }
 const phoneShow = (details) => {
+  loaderId.className = "d-none";
   row.textContent = "";
-  errorId.textContent = "";
+  searchId.value = "";
   const div = document.createElement("div");
   div.classList.add("col-lg-12");
   div.innerHTML = `
@@ -185,6 +187,7 @@ const phoneShow = (details) => {
       sensorId.appendChild(li);
   }
    category.textContent = "";
+   errorId.textContent = "";
 };
 
 // =============Add Cart=============
