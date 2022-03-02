@@ -8,31 +8,40 @@
 const row = document.getElementById('row');
 const searchId = document.getElementById('search');
 const loaderId = document.getElementById("loader");
+const marqueeId = document.getElementById("marquee");
 const errorId = document.getElementById('error');
 // =================Error=================
-const showError = (error) => {
+const showError = () => {
   errorId.className = "d-block text-center text-danger fw-bold fs-4";
 };
 
 // =================Search Phone===============
 const searchBar = () => {
   const searchText = (searchId.value).toLowerCase();
-  searchId.value = "";
-  loaderId.className = "d-block";
-  if (searchText === "" || searchText.length !== 0) {
-    errorId.className = "d-block text-center text-danger fw-bold fs-4";
-  }
   const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+  searchId.value = "";
   fetch(url)
     .then((res) => res.json())
-    .then((data) => searchResult(data.data.slice(0, 20)))
-    .catch((error) => showError(error));
+    .then((data) => {
+      if (data.data.length === 0 || searchText === '') {
+        loaderId.className = "d-block";
+        errorId.className = "d-block text-center text-danger fw-bold fs-4";
+        row.innerHTML = '';
+      } else {
+        searchResult(data.data.slice(0, 20)).catch((error) => showError(error));
+        errorId.className = "d-none";
+        loaderId.className = "d-none";
+      }
+    })  
 };
 
 
 
 const searchResult = (searchresults) => {
-  loaderId.className = "d-none";
+  console.log(searchresults);
+   loaderId.className = "d-none";
+   errorId.className = "d-none";
+   marqueeId.className = 'd-none';
     searchId.value = '';
     searchresults.forEach(searchresult => {
         const div = document.createElement('div');
@@ -51,13 +60,11 @@ const searchResult = (searchresults) => {
         </div>
     `;
     row.appendChild(div);
-    errorId.textContent = "";
     
     })
 };
 // ==============Phone Details================
 const phoneDetails = (id) => {
-  loaderId.className = "d-block";
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
       .then((res) => res.json())
       .then((data) => phoneShow(data.data))
@@ -65,6 +72,8 @@ const phoneDetails = (id) => {
 }
 const phoneShow = (details) => {
   loaderId.className = "d-none";
+  errorId.className = "d-none";
+  marqueeId.className = "d-none";
   row.innerHTML = "";
   searchId.value = "";
   const div = document.createElement("div");
