@@ -18,6 +18,10 @@ body {
     font-size: 16px;
 }
 
+main{
+    min-height: 38em;
+}
+
 .w-18 {
     width: 18%!important;
 }
@@ -103,9 +107,6 @@ marquee{
     height: 50px;
 }
 
-main.pt-5 {
-    min-height: 38em;
-}
 /* ========Media Query========= */
 
 @media (max-width: 767px) {

@@ -9,6 +9,7 @@ const row = document.getElementById('row');
 const searchId = document.getElementById('search');
 const loaderId = document.getElementById("loader");
 const marqueeId = document.getElementById("marquee");
+const welcomeId = document.getElementById("welcome");
 const errorId = document.getElementById('error');
 // =================Error=================
 const showError = () => {
@@ -25,20 +26,18 @@ const searchBar = () => {
     .then((data) => {
       if (data.data.length === 0 || searchText === '') {
         loaderId.className = "d-block";
+        welcomeId.className ="d-none"
         errorId.className = "d-block text-center text-danger fw-bold fs-4";
         row.innerHTML = '';
       } else {
-        searchResult(data.data.slice(0, 20)).catch((error) => showError(error));
+        searchResult(data.data.slice(0, 20));
         errorId.className = "d-none";
         loaderId.className = "d-none";
       }
     })  
 };
 
-
-
 const searchResult = (searchresults) => {
-  console.log(searchresults);
    loaderId.className = "d-none";
    errorId.className = "d-none";
    marqueeId.className = 'd-none';
@@ -68,7 +67,7 @@ const phoneDetails = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
       .then((res) => res.json())
       .then((data) => phoneShow(data.data))
-      .catch((error) => showError(error));
+      // .catch((error) => showError(error));
 }
 const phoneShow = (details) => {
   loaderId.className = "d-none";
