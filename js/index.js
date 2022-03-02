@@ -6,7 +6,6 @@
  */
 // ===== Variable =======
 const row = document.getElementById('row');
-const category = document.getElementById("category");
 const searchId = document.getElementById('search');
 const loaderId = document.getElementById("loader");
 const errorId = document.getElementById('error');
@@ -20,9 +19,8 @@ const searchBar = () => {
   const searchText = (searchId.value).toLowerCase();
   searchId.value = "";
   loaderId.className = "d-block";
-  if (searchText === "") {
+  if (searchText === "" || searchText.length !== 0) {
     errorId.className = "d-block text-center text-danger fw-bold fs-4";
-    loaderId.className = "d-none";
   }
   const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
   fetch(url)
@@ -35,7 +33,6 @@ const searchBar = () => {
 
 const searchResult = (searchresults) => {
   loaderId.className = "d-none";
-    row.textContent = '';
     searchId.value = '';
     searchresults.forEach(searchresult => {
         const div = document.createElement('div');
@@ -55,7 +52,7 @@ const searchResult = (searchresults) => {
     `;
     row.appendChild(div);
     errorId.textContent = "";
-    category.textContent = "";
+    
     })
 };
 // ==============Phone Details================
@@ -68,7 +65,7 @@ const phoneDetails = (id) => {
 }
 const phoneShow = (details) => {
   loaderId.className = "d-none";
-  row.textContent = "";
+  row.innerHTML = "";
   searchId.value = "";
   const div = document.createElement("div");
   div.classList.add("col-lg-12");
@@ -188,8 +185,7 @@ const phoneShow = (details) => {
       li.innerText = "No";
       sensorId.appendChild(li);
   }
-   category.textContent = "";
-   errorId.textContent = "";
+  //  errorId.textContent = "";
 };
 
 // =============Add Cart=============

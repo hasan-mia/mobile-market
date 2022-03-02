@@ -97,7 +97,9 @@ body {
     height: 50px;
 }
 
-
+main.pt-5 {
+    min-height: 38em;
+}
 /* ========Media Query========= */
 
 @media (max-width: 767px) {
