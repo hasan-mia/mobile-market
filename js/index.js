@@ -42,6 +42,7 @@ const searchResult = (searchresults) => {
    errorId.className = "d-none";
    marqueeId.className = 'd-none';
     searchId.value = '';
+    row.innerHTML = "";
     searchresults.forEach(searchresult => {
         const div = document.createElement('div');
         div.classList.add('col-lg-4')
